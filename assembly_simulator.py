@@ -560,14 +560,14 @@ def run_string(s):
 if __name__ == '__main__':
     initialize(
         # Registry values
-        {
+        reg={
             "R1": 0b11110110,
             "R2": 3240,
             "R5": 2032
         },
 
         # Memory values
-        {
+        mem={
             "1204": 3240,
             "3240": 508
         },
