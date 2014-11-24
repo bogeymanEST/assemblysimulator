@@ -55,4 +55,6 @@ R3 | The value of registry 3
 
 
 #Operations
-Click [here](https://github.com/bogeymanEST/assemblysimulator/blob/master/operations.md) for the complete list of operations.
+All operation names are case-insensitive
+
+Click [here](https://github.com/bogeymanEST/assemblysimulator/blob/master/operations.md) for a complete list of operations.

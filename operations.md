@@ -5,6 +5,7 @@
 
 Adds a and b and stores the result in the destination.
 
+
 `a` - The source of the first value
 
 `b` - The source of the second value (default = accumulator)
@@ -14,7 +15,11 @@ Adds a and b and stores the result in the destination.
 Examples:
 
 ```
-Add R1, 25
+Add R1, 25 ;Add the value of R1 to the value of memory slot 25 and store it in the same memory slot
+```
+
+```
+Add #4 ;Add 4 to the value of the accumulator
 ```
 
 ##And
@@ -22,6 +27,7 @@ Add R1, 25
 
 
 Performs the logical AND operation on the binary representation of the given values and stores it in the destination
+
 `a` - The first value
 
 `b` - The second value (default = accumulator)
@@ -31,27 +37,40 @@ Performs the logical AND operation on the binary representation of the given val
 Examples:
 
 ```
+Load #%1001, R1 ;Load binary 1000 into R1
+And #%1100, R1 ;Perform the AND operation and store the result in R1 (now contains binary 1000)
 ```
 
 ##AshiftL
-`AshiftL num, dest`
+`AshiftL num, val, dest`
 
-`num` - 
 
-`dest` - 
+Performs the logical left shift on the binary representation of the given value.
+
+`num` - The number of shifts to do
+
+`val` - The value to shift
+
+`dest` - The destination to save the result to (default = val)
 
 ##AshiftR
-`AshiftR num, dest`
+`AshiftR num, val, dest`
 
-`num` - 
 
-`dest` - 
+Performs the artihmetic right shift on the binary representation of the given value.
+
+`num` - The number of bits to shift
+
+`val` - The value to shift
+
+`dest` - The destination to save the result to (default = val)
 
 ##Branch!=0
 `Branch!=0 dest`
 
 
 If the value of the last operation is not equal to 0, jump the program execution to the given line.
+
 `dest` - The line to jump to (lines are numbered from 0, each line number increasing by the word size)
 
 ##Branch<0
@@ -59,6 +78,7 @@ If the value of the last operation is not equal to 0, jump the program execution
 
 
 If the value of the last operation is less than 0, jump the program execution to the given line.
+
 `dest` - The line to jump to (lines are numbered from 0, each line number increasing by the word size)
 
 ##Branch=0
@@ -66,6 +86,7 @@ If the value of the last operation is less than 0, jump the program execution to
 
 
 If the value of the last operation is equal to 0, jump the program execution to the given line.
+
 `dest` - The line to jump to (lines are numbered from 0, each line number increasing by the word size)
 
 ##Branch>0
@@ -73,6 +94,7 @@ If the value of the last operation is equal to 0, jump the program execution to 
 
 
 If the value of the last operation is greater than 0, jump the program execution to the given line.
+
 `dest` - The line to jump to (lines are numbered from 0, each successive line number increasing by the word size)
 
 Examples:
@@ -91,6 +113,7 @@ Load 123, R1 ;Memory slot 123 now contains the result of the additions (13 + 3 *
 
 
 Clears the given value
+
 `loc` - The value to clear (default = accumulator)
 
 Examples:
@@ -108,6 +131,7 @@ Clear ;Clear the accumulator
 
 
 Decrease the given value by one.
+
 `a` - The value to decrement (default = accumulator)
 
 Examples:
@@ -122,6 +146,7 @@ Decrement ;Accumulator is now 14
 
 
 Increase the given value by one.
+
 `a` - The value to increment (default = accumulator)
 
 Examples:
@@ -136,6 +161,7 @@ Increment R1 ;R1 is now 5
 
 
 Loads the source data into the destination.
+
 
 `src` - The source of the data
 
@@ -152,24 +178,35 @@ Load #45, R1 ;Loads the decimal number into registry R1
 ```
 
 ##LshiftL
-`LshiftL num, dest`
+`LshiftL num, val, dest`
 
-`num` - 
 
-`dest` - 
+Performs the logical left shift on the binary representation of the given value.
+
+`num` - The number of shifts to do
+
+`val` - The value to shift
+
+`dest` - The destination to save the result to (default = val)
 
 ##Multiply
-`Multiply src, dest`
+`Multiply a, b, dest`
 
-`src` - 
 
-`dest` - 
+Multiplies two values and stores the result in the destination value.
+
+`a` - The first value
+
+`b` - The second value (default = accumulator)
+
+`dest` - The destination to save the result to (default = b)
 
 ##Not
 `Not src, dest`
 
 
 Performs the logical NOT operation on the binary representation of the given value and stores it in the destination
+
 `src` - The source value
 
 `dest` - The destination (default = accumulator)
@@ -182,44 +219,65 @@ Not R1, R1 ;R1 now contains 0101
 ```
 
 ```
-Load #%1100 R1 ;Load binary 1100 into R1
+Load #%1100, R1 ;Load binary 1100 into R1
 Not R1 ;Accumulator now contains 0011
 Load R1 ;Load the value of the accumulator into R1
 ```
 
 ##RotateL
-`RotateL num, dest`
+`RotateL num, val, dest`
 
-`num` - 
 
-`dest` - 
+Rotates the binary representation of the given value to the left
+
+`num` - Number of bits to rotate
+
+`val` - The value to rotate
+
+`dest` - The destination to save the result to (default = val)
 
 ##RotateLC
-`RotateLC num, dest`
+`RotateLC num, val, dest`
 
-`num` - 
 
-`dest` - 
+Rotates the binary representation of the given value to the left taking into account the carry bit.
+
+`num` - Number of bits to rotate
+
+`val` - The value to rotate
+
+`dest` - The destination to save the result to (default = val)
 
 ##RotateR
-`RotateR num, dest`
+`RotateR num, val, dest`
 
-`num` - 
 
-`dest` - 
+Rotates the binary representation of the given value to the right
+
+`num` - Number of bits to rotate
+
+`val` - The value to rotate
+
+`dest` - The destination to save the result to (default = val)
 
 ##RotateRC
-`RotateRC num, dest`
+`RotateRC num, val, dest`
 
-`num` - 
 
-`dest` - 
+Rotates the binary representation of the given value to the right taking into account the carry bit.
+
+`num` - Number of bits to rotate
+
+`val` - The value to rotate
+
+`dest` - The destination to save the result to (default = val)
 
 ##Store
 `Store dest`
 
 
 Sets the value of the destination to the value of the accumulator
+
 `dest` - The destination
 
 Examples:
@@ -232,9 +290,14 @@ Store R1 ;R1 now contains 9
 ```
 
 ##lshiftR
-`lshiftR num, dest`
+`lshiftR num, val, dest`
 
-`num` - 
 
-`dest` - 
+Performs the logical right shift on the binary representation of the given value.
+
+`num` - The number of shifts to do
+
+`val` - The value to shift
+
+`dest` - The destination to save the result to (default = val)
 

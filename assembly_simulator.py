@@ -73,7 +73,9 @@ def add(a, b=accumulator, dest=None):
     :param b: The source of the second value (default = accumulator)
     :param dest: The destination (default = b)
     :example:
-    Add R1, 25
+    Add R1, 25 ;Add the value of R1 to the value of memory slot 25 and store it in the same memory slot
+    :example:
+    Add #4 ;Add 4 to the value of the accumulator
     """
     if dest is None:
         dest = b
@@ -179,7 +181,7 @@ def clear(loc=accumulator):
     result.value = 0
 
 
-def not_cmd(src, dest=accumulator):
+def not_cmd(src, dest=None):
     """
     Performs the logical NOT operation on the binary representation of the given value and stores it in the destination
     :param src: The source value
@@ -188,22 +190,25 @@ def not_cmd(src, dest=accumulator):
     Load #%1010 R1 ;Load binary 1010 into R1
     Not R1, R1 ;R1 now contains 0101
     :example:
-    Load #%1100 R1 ;Load binary 1100 into R1
+    Load #%1100, R1 ;Load binary 1100 into R1
     Not R1 ;Accumulator now contains 0011
     Load R1 ;Load the value of the accumulator into R1
     """
+    if dest is None:
+        dest = src
     dest.set_binary("".join("1" if n == "0" else "0" for n in src.get_binary()))
     result.value = dest.value
 
 
-def and_cmd(a, b=accumulator, dest=None):
+def and_cmd(a, b, dest=None):
     """
     Performs the logical AND operation on the binary representation of the given values and stores it in the destination
     :param a: The first value
     :param b: The second value (default = accumulator)
     :param dest: The destination (default = b)
     :example:
-
+    Load #%1001, R1 ;Load binary 1000 into R1
+    And #%1100, R1 ;Perform the AND operation and store the result in R1 (now contains binary 1000)
     """
     if dest is None:
         dest = b
@@ -219,13 +224,16 @@ def and_cmd(a, b=accumulator, dest=None):
     result.value = dest.value
 
 
-def lshiftl(num, dest):
+def lshiftl(num, val, dest=None):
     """
-
-    :param num:
-    :param dest:
+    Performs the logical left shift on the binary representation of the given value.
+    :param num: The number of shifts to do
+    :param val: The value to shift
+    :param dest: The destination to save the result to (default = val)
     """
-    d_bin = dest.get_binary()
+    if dest is None:
+        dest = val
+    d_bin = val.get_binary()
     c = 0
     while c < num.value:
         d_bin = d_bin[1:] + "0"
@@ -234,8 +242,16 @@ def lshiftl(num, dest):
     result.value = dest.value
 
 
-def lshiftr(num, dest):
-    d_bin = dest.get_binary()
+def lshiftr(num, val, dest=None):
+    """
+    Performs the logical right shift on the binary representation of the given value.
+    :param num: The number of shifts to do
+    :param val: The value to shift
+    :param dest: The destination to save the result to (default = val)
+    """
+    if dest is None:
+        dest = val
+    d_bin = val.get_binary()
     c = 0
     while c < num.value:
         d_bin = "0" + d_bin[0:len(d_bin) - 1]
@@ -244,8 +260,14 @@ def lshiftr(num, dest):
     result.value = dest.value
 
 
-def ashiftr(num, dest):
-    d_bin = dest.get_binary()
+def ashiftr(num, val, dest=None):
+    """
+    Performs the artihmetic right shift on the binary representation of the given value.
+    :param num: The number of bits to shift
+    :param val: The value to shift
+    :param dest: The destination to save the result to (default = val)
+    """
+    d_bin = val.get_binary()
     c = 0
     while c < num.value:
         d_bin = d_bin[0] + d_bin[0:len(d_bin) - 1]
@@ -254,8 +276,16 @@ def ashiftr(num, dest):
     result.value = dest.value
 
 
-def rotatel(num, dest):
-    d_bin = dest.get_binary()
+def rotatel(num, val, dest=None):
+    """
+    Rotates the binary representation of the given value to the left
+    :param num: Number of bits to rotate
+    :param val: The value to rotate
+    :param dest: The destination to save the result to (default = val)
+    """
+    if dest is None:
+        dest = val
+    d_bin = val.get_binary()
     c = 0
     while c < num.value:
         d_bin = d_bin[1:] + d_bin[0]
@@ -264,7 +294,15 @@ def rotatel(num, dest):
     result.value = dest.value
 
 
-def rotater(num, dest):
+def rotater(num, val, dest):
+    """
+    Rotates the binary representation of the given value to the right
+    :param num: Number of bits to rotate
+    :param val: The value to rotate
+    :param dest: The destination to save the result to (default = val)
+    """
+    if dest is None:
+        dest = val
     d_bin = dest.get_binary()
     c = 0
     while c < num.value:
@@ -274,7 +312,15 @@ def rotater(num, dest):
     result.value = dest.value
 
 
-def rotatelc(num, dest):
+def rotatelc(num, val, dest=None):
+    """
+    Rotates the binary representation of the given value to the left taking into account the carry bit.
+    :param num: Number of bits to rotate
+    :param val: The value to rotate
+    :param dest: The destination to save the result to (default = val)
+    """
+    if dest is None:
+        dest = val
     global carry
     d_bin = dest.get_binary()
     c = 0
@@ -287,7 +333,15 @@ def rotatelc(num, dest):
     result.value = dest.value
 
 
-def rotaterc(num, dest):
+def rotaterc(num, val, dest=None):
+    """
+    Rotates the binary representation of the given value to the right taking into account the carry bit.
+    :param num: Number of bits to rotate
+    :param val: The value to rotate
+    :param dest: The destination to save the result to (default = val)
+    """
+    if dest is None:
+        dest = val
     global carry
     d_bin = dest.get_binary()
     c = 0
@@ -300,8 +354,16 @@ def rotaterc(num, dest):
     result.value = dest.value
 
 
-def multiply(src, dest=accumulator):
-    dest.value *= src.value
+def multiply(a, b=accumulator, dest=None):
+    """
+    Multiplies two values and stores the result in the destination value.
+    :param a: The first value
+    :param b: The second value (default = accumulator)
+    :param dest: The destination to save the result to (default = b)
+    """
+    if dest is None:
+        dest = b
+    dest.value = a.value * b.value
     result.value = dest.value
 
 

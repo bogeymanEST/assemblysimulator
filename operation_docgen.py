@@ -50,7 +50,7 @@ for cmd in sorted(assembly_simulator.pretty_commands.items(), key=lambda v: v[0]
     args = get_args(cmd[1])
     fout.write("##" + cmd[0] + "\n")
     fout.write("`" + cmd[0] + " " + ", ".join(a[0] for a in args) + "`\n\n")
-    fout.write("" if doc is None or len(doc["description"]) == 0 else doc["description"] + "\n")
+    fout.write("" if doc is None or len(doc["description"]) == 0 else doc["description"] + "\n\n")
     for arg in args:
         fout.write("`%s` - %s\n\n" % arg)
     if doc is not None and doc["example"]:
