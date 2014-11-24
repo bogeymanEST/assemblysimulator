@@ -381,7 +381,7 @@ commands = {
     "Not": not_cmd,
     "And": and_cmd,
     "LshiftL": lshiftl,
-    "lshiftR": lshiftr,
+    "LshiftR": lshiftr,
     "AshiftR": ashiftr,
     "AshiftL": lshiftl,
     "RotateL": rotatel,
