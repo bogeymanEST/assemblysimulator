@@ -43,6 +43,7 @@ Add (R1),(R2),R5
  * mem - A dictionary mapping memory locations to their initial values. There is no limit to the number of memory locations.
  * sp - The initial value of the stack pointer
  * c - The carry bit (either "1" or "0")
+
 #Syntax
 A program consists of a number of lines. Each operation is on its own line. Operation arguments are separated by commas.
 
