@@ -60,7 +60,7 @@ Example | Meaning
 341 | The value of the memory block at address 341
 R3 | The value of registry 3
 SP | The value of the stack pointer
-(567) | The value of the memory block at the stored at memory address 567
+(567) | The value of the memory block at the address stored in memory block 567
 (R2) | The value of the memory at the address stored in registry 2
 (R1)+ | Return the value of the memory at the address stored in R1 and increment the value of R1 by one word (default 4 bytes)
 -(245) | Decrement the value of memory block 245 by one word and return the memory block value at the address stored in memory block 245
