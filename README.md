@@ -38,6 +38,11 @@ Add (R1),(R2),R5
 """)
 ```
 
+#Syntax
+A program consists of a number of lines. Each operation is on its own line. Operation arguments are separated by commas.
+
+Comments can be written after operations and they start with a semicolon and continue until the end of the line.
+
 #Pointers
 Here is a table of the ways values can be pointed to.
 
