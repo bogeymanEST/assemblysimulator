@@ -1,5 +1,7 @@
 #Operations
-##Add a, b, dest
+##Add
+`Add a, b, dest`
+
 
 Adds a and b and stores the result in the destination.
 
@@ -15,7 +17,9 @@ Examples:
 Add R1, 25
 ```
 
-##And a, b, dest
+##And
+`And a, b, dest`
+
 
 Performs the logical AND operation on the binary representation of the given values and stores it in the destination
 `a` - The first value
@@ -29,32 +33,44 @@ Examples:
 ```
 ```
 
-##AshiftL num, dest
+##AshiftL
+`AshiftL num, dest`
+
 `num` - 
 
 `dest` - 
 
-##AshiftR num, dest
+##AshiftR
+`AshiftR num, dest`
+
 `num` - 
 
 `dest` - 
 
-##Branch!=0 dest
+##Branch!=0
+`Branch!=0 dest`
+
 
 If the value of the last operation is not equal to 0, jump the program execution to the given line.
 `dest` - The line to jump to (lines are numbered from 0, each line number increasing by the word size)
 
-##Branch<0 dest
+##Branch<0
+`Branch<0 dest`
+
 
 If the value of the last operation is less than 0, jump the program execution to the given line.
 `dest` - The line to jump to (lines are numbered from 0, each line number increasing by the word size)
 
-##Branch=0 dest
+##Branch=0
+`Branch=0 dest`
+
 
 If the value of the last operation is equal to 0, jump the program execution to the given line.
 `dest` - The line to jump to (lines are numbered from 0, each line number increasing by the word size)
 
-##Branch>0 dest
+##Branch>0
+`Branch>0 dest`
+
 
 If the value of the last operation is greater than 0, jump the program execution to the given line.
 `dest` - The line to jump to (lines are numbered from 0, each successive line number increasing by the word size)
@@ -70,7 +86,9 @@ Branch>0 8 ;Jump to the "Add ..." line if R1 is greater than 0.
 Load 123, R1 ;Memory slot 123 now contains the result of the additions (13 + 3 * 4)
 ```
 
-##Clear loc
+##Clear
+`Clear loc`
+
 
 Clears the given value
 `loc` - The value to clear (default = accumulator)
@@ -85,7 +103,9 @@ Clear (R1) ;Clear the memory slot pointed to by R1
 Clear ;Clear the accumulator
 ```
 
-##Decrement a
+##Decrement
+`Decrement a`
+
 
 Decrease the given value by one.
 `a` - The value to decrement (default = accumulator)
@@ -97,7 +117,9 @@ Load #15 ;Set the value of the accumulator to 15
 Decrement ;Accumulator is now 14
 ```
 
-##Increment a
+##Increment
+`Increment a`
+
 
 Increase the given value by one.
 `a` - The value to increment (default = accumulator)
@@ -109,7 +131,9 @@ Load #4, R1 ;Set R1 to 4
 Increment R1 ;R1 is now 5
 ```
 
-##Load src, dest
+##Load
+`Load src, dest`
+
 
 Loads the source data into the destination.
 
@@ -127,17 +151,23 @@ Load 44 ;Loads the value of memory slot 44 into the accumulator
 Load #45, R1 ;Loads the decimal number into registry R1
 ```
 
-##LshiftL num, dest
+##LshiftL
+`LshiftL num, dest`
+
 `num` - 
 
 `dest` - 
 
-##Multiply src, dest
+##Multiply
+`Multiply src, dest`
+
 `src` - 
 
 `dest` - 
 
-##Not src, dest
+##Not
+`Not src, dest`
+
 
 Performs the logical NOT operation on the binary representation of the given value and stores it in the destination
 `src` - The source value
@@ -157,27 +187,37 @@ Not R1 ;Accumulator now contains 0011
 Load R1 ;Load the value of the accumulator into R1
 ```
 
-##RotateL num, dest
+##RotateL
+`RotateL num, dest`
+
 `num` - 
 
 `dest` - 
 
-##RotateLC num, dest
+##RotateLC
+`RotateLC num, dest`
+
 `num` - 
 
 `dest` - 
 
-##RotateR num, dest
+##RotateR
+`RotateR num, dest`
+
 `num` - 
 
 `dest` - 
 
-##RotateRC num, dest
+##RotateRC
+`RotateRC num, dest`
+
 `num` - 
 
 `dest` - 
 
-##Store dest
+##Store
+`Store dest`
+
 
 Sets the value of the destination to the value of the accumulator
 `dest` - The destination
@@ -191,7 +231,9 @@ Add #5 ;Add 5 to the accumulator
 Store R1 ;R1 now contains 9
 ```
 
-##lshiftR num, dest
+##lshiftR
+`lshiftR num, dest`
+
 `num` - 
 
 `dest` - 
