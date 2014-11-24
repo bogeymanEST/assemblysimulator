@@ -207,7 +207,7 @@ def and_cmd(a, b, dest=None):
     :param b: The second value (default = accumulator)
     :param dest: The destination (default = b)
     :example:
-    Load #%1001, R1 ;Load binary 1000 into R1
+    Load #%1001, R1 ;Load binary 1001 into R1
     And #%1100, R1 ;Perform the AND operation and store the result in R1 (now contains binary 1000)
     """
     if dest is None:
@@ -360,6 +360,10 @@ def multiply(a, b=accumulator, dest=None):
     :param a: The first value
     :param b: The second value (default = accumulator)
     :param dest: The destination to save the result to (default = b)
+    :example:
+    Multiply #5 ;Multiplies the value of the accumulator by 5
+    :example:
+    Multiply R1, #4, R2 ;Multiplies the value of R1 by 4 and stores the result in R2
     """
     if dest is None:
         dest = b

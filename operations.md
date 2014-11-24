@@ -37,7 +37,7 @@ Performs the logical AND operation on the binary representation of the given val
 Examples:
 
 ```
-Load #%1001, R1 ;Load binary 1000 into R1
+Load #%1001, R1 ;Load binary 1001 into R1
 And #%1100, R1 ;Perform the AND operation and store the result in R1 (now contains binary 1000)
 ```
 
@@ -212,6 +212,16 @@ Multiplies two values and stores the result in the destination value.
 `b` - The second value (default = accumulator)
 
 `dest` - The destination to save the result to (default = b)
+
+Examples:
+
+```
+Multiply #5 ;Multiplies the value of the accumulator by 5
+```
+
+```
+Multiply R1, #4, R2 ;Multiplies the value of R1 by 4 and stores the result in R2
+```
 
 ##Not
 `Not src, dest`
