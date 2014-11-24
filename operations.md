@@ -189,6 +189,18 @@ Performs the logical left shift on the binary representation of the given value.
 
 `dest` - The destination to save the result to (default = val)
 
+##LshiftR
+`LshiftR num, val, dest`
+
+
+Performs the logical right shift on the binary representation of the given value.
+
+`num` - The number of shifts to do
+
+`val` - The value to shift
+
+`dest` - The destination to save the result to (default = val)
+
 ##Multiply
 `Multiply a, b, dest`
 
@@ -288,16 +300,4 @@ Add #4 ;Add 4 to the accumulator
 Add #5 ;Add 5 to the accumulator
 Store R1 ;R1 now contains 9
 ```
-
-##lshiftR
-`lshiftR num, val, dest`
-
-
-Performs the logical right shift on the binary representation of the given value.
-
-`num` - The number of shifts to do
-
-`val` - The value to shift
-
-`dest` - The destination to save the result to (default = val)
 
