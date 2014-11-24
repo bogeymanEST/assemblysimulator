@@ -51,11 +51,30 @@ DEBUG = False
 
 # Commands
 def load(src, dest=accumulator):
+    """
+    Loads the source data into the destination.
+
+    :param src: The source of the data
+    :param dest: The destination to load the data into (default = accumulator)
+    :example:
+    Load 44 ;Loads the value of memory slot 44 into the accumulator
+    :example:
+    Load #45, R1 ;Loads the decimal number into registry R1
+    """
     dest.value = src.value
     result.value = dest.value
 
 
 def add(a, b=accumulator, dest=None):
+    """
+    Adds a and b and stores the result in the destination.
+
+    :param a: The source of the first value
+    :param b: The source of the second value (default = accumulator)
+    :param dest: The destination (default = b)
+    :example:
+    Add R1, 25
+    """
     if dest is None:
         dest = b
     dest.value = a.value + b.value
@@ -63,55 +82,129 @@ def add(a, b=accumulator, dest=None):
 
 
 def store(dest):
+    """
+    Sets the value of the destination to the value of the accumulator
+    :param dest: The destination
+    :example:
+    Clear ;Clear the accumulator
+    Add #4 ;Add 4 to the accumulator
+    Add #5 ;Add 5 to the accumulator
+    Store R1 ;R1 now contains 9
+    """
     dest.value = accumulator.value
     result.value = dest.value
 
 
-def increment(a):
+def increment(a=accumulator):
+    """
+    Increase the given value by one.
+    :param a: The value to increment (default = accumulator)
+    :example:
+    Load #4, R1 ;Set R1 to 4
+    Increment R1 ;R1 is now 5
+    """
     a.value += 1
     result.value = a.value
 
 
-def decrement(a):
+def decrement(a=accumulator):
+    """
+    Decrease the given value by one.
+    :param a: The value to decrement (default = accumulator)
+    :example:
+    Load #15 ;Set the value of the accumulator to 15
+    Decrement ;Accumulator is now 14
+    """
     a.value -= 1
     result.value = a.value
 
 
 def branch_g0(dest):
+    """
+    If the value of the last operation is greater than 0, jump the program execution to the given line.
+    :param dest: The line to jump to (lines are numbered from 0, each successive line number increasing by the word size)
+    :example:
+    Load #13, R2 ;Set result to 13
+    Load #4, R1 ;Set the number of loops
+    Add #3, R2 ;Add 3 to the result
+    Increment R1 ;Add 1 to the loop counter
+    Branch>0 8 ;Jump to the "Add ..." line if R1 is greater than 0.
+    Load 123, R1 ;Memory slot 123 now contains the result of the additions (13 + 3 * 4)
+    """
     global counter
     if result.value > 0:
         counter.value = dest.value
 
 
 def branch_l0(dest):
+    """
+    If the value of the last operation is less than 0, jump the program execution to the given line.
+    :param dest: The line to jump to (lines are numbered from 0, each line number increasing by the word size)
+    """
     global counter
     if result.value < 0:
         counter.value = dest.value
 
 
 def branch_e0(dest):
+    """
+    If the value of the last operation is equal to 0, jump the program execution to the given line.
+    :param dest: The line to jump to (lines are numbered from 0, each line number increasing by the word size)
+    """
     global counter
     if result.value == 0:
         counter.value = dest.value
 
 
 def branch_ne0(dest):
+    """
+    If the value of the last operation is not equal to 0, jump the program execution to the given line.
+    :param dest: The line to jump to (lines are numbered from 0, each line number increasing by the word size)
+    """
     global counter
     if result.value != 0:
         counter.value = dest.value
 
 
-def clear(loc):
+def clear(loc=accumulator):
+    """
+    Clears the given value
+    :param loc: The value to clear (default = accumulator)
+    :example:
+    Clear (R1) ;Clear the memory slot pointed to by R1
+    :example:
+    Clear ;Clear the accumulator
+    """
     loc.value = 0
     result.value = 0
 
 
 def not_cmd(src, dest=accumulator):
+    """
+    Performs the logical NOT operation on the binary representation of the given value and stores it in the destination
+    :param src: The source value
+    :param dest: The destination (default = accumulator)
+    :example:
+    Load #%1010 R1 ;Load binary 1010 into R1
+    Not R1, R1 ;R1 now contains 0101
+    :example:
+    Load #%1100 R1 ;Load binary 1100 into R1
+    Not R1 ;Accumulator now contains 0011
+    Load R1 ;Load the value of the accumulator into R1
+    """
     dest.set_binary("".join("1" if n == "0" else "0" for n in src.get_binary()))
     result.value = dest.value
 
 
 def and_cmd(a, b=accumulator, dest=None):
+    """
+    Performs the logical AND operation on the binary representation of the given values and stores it in the destination
+    :param a: The first value
+    :param b: The second value (default = accumulator)
+    :param dest: The destination (default = b)
+    :example:
+
+    """
     if dest is None:
         dest = b
     width = max(a.get_width(), b.get_width())
@@ -127,6 +220,11 @@ def and_cmd(a, b=accumulator, dest=None):
 
 
 def lshiftl(num, dest):
+    """
+
+    :param num:
+    :param dest:
+    """
     d_bin = dest.get_binary()
     c = 0
     while c < num.value:
@@ -208,30 +306,32 @@ def multiply(src, dest=accumulator):
 
 
 commands = {
-    "load": load,
-    "add": add,
-    "store": store,
-    "decrement": decrement,
-    "increment": increment,
-    "branch>0": branch_g0,
-    "branch<0": branch_l0,
-    "branch=0": branch_e0,
-    "branch!=0": branch_ne0,
-    "clear": clear,
-    "not": not_cmd,
-    "and": and_cmd,
-    "lshiftl": lshiftl,
-    "lshiftr": lshiftr,
-    "ashiftr": ashiftr,
-    "ashiftl": lshiftl,
-    "rotatel": rotatel,
-    "rotater": rotater,
-    "rotatelc": rotatelc,
-    "rotaterc": rotaterc,
-    "multiply": multiply,
+    "Load": load,
+    "Add": add,
+    "Store": store,
+    "Decrement": decrement,
+    "Increment": increment,
+    "Branch>0": branch_g0,
+    "Branch<0": branch_l0,
+    "Branch=0": branch_e0,
+    "Branch!=0": branch_ne0,
+    "Clear": clear,
+    "Not": not_cmd,
+    "And": and_cmd,
+    "LshiftL": lshiftl,
+    "lshiftR": lshiftr,
+    "AshiftR": ashiftr,
+    "AshiftL": lshiftl,
+    "RotateL": rotatel,
+    "RotateR": rotater,
+    "RotateLC": rotatelc,
+    "RotateRC": rotaterc,
+    "Multiply": multiply,
 }
 
+pretty_commands = commands
 
+commands = {k.lower(): v for k, v in commands.items()}
 # Debug print
 def d(*args):
     if DEBUG:
@@ -395,30 +495,31 @@ def run_string(s):
     return ret
 
 
-initialize(
-    # Registry values
-    {
-        "R1": 0b11110110,
-        "R2": 3240,
-        "R5": 2032
-    },
+if __name__ == '__main__':
+    initialize(
+        # Registry values
+        {
+            "R1": 0b11110110,
+            "R2": 3240,
+            "R5": 2032
+        },
 
-    # Memory values
-    {
-        "1204": 3240,
-        "3240": 508
-    },
+        # Memory values
+        {
+            "1204": 3240,
+            "3240": 508
+        },
 
-    # Stack pointer
-    sp=Value(),
+        # Stack pointer
+        sp=Value(),
 
-    # Carry bit
-    c="1"
-)
-run_string(
-"""
-Load #1204, R1
-Add (R1),(R2),R5
-"""
-)
+        # Carry bit
+        c="1"
+    )
+    run_string(
+        """
+        Load #1204, R1
+        Add (R1),(R2),R5
+        """
+    )
 
